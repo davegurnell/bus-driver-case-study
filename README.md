@@ -80,3 +80,5 @@ The number of stops it takes to have all drivers on board with the latest gossip
 ## References
 
 - [Gossiping Bus Drivers on Kata-Log](https://kata-log.rocks/gossiping-bus-drivers-kata)
+- [Guide to Mob Programming](https://www.jamasoftware.com/blog/mob-programming-jama/)
+- [Rules of TDD](http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd)
