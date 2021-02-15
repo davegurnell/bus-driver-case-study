@@ -1,62 +1,81 @@
 package code
 
-object Main extends App {
+object Demo extends App {
   import BusDrivers._
 
   println("Example 1:")
 
-  println(format(solve(parse(
-    """
-    3 1 2 3
-    3 2 3 1
-    4 2 3 4 5
-    """
-  ))))
+  println(
+    format(
+      solve(
+        parse(
+          """
+          3 1 2 3
+          3 2 3 1
+          4 2 3 4 5
+          """
+        )
+      )
+    )
+  )
 
   println("Example 2:")
 
-  println(format(solve(parse(
-    """
-    2 1 2
-    5 2 8
-    """
-  ))))
-
+  println(
+    format(
+      solve(
+        parse(
+          """
+          2 1 2
+          5 2 8
+          """
+        )
+      )
+    )
+  )
 
   println("Example 3:")
 
-  println(format(solve(parse(
-    """
-    1
-    1
-    1
-    """
-  ))))
+  println(
+    format(
+      solve(
+        parse(
+          """
+          1
+          1
+          1
+          """
+        )
+      )
+    )
+  )
 }
 
 case class BusDriver(route: List[Int], gossips: Set[Int])
 
 object BusDrivers {
   def parse(input: String): List[BusDriver] =
-    input.trim.split("\n")
+    input.trim
+      .split("\n")
       .zipWithIndex
       .map { case (line, index) =>
         BusDriver(
           line.trim.split(" ").map(_.toInt).toList,
           Set(index)
         )
-      }.toList
+      }
+      .toList
 
   def format(result: Option[Int]): String =
     result.fold("never")(n => (n + 1).toString)
 
   def solve(drivers: List[BusDriver], minute: Int = 0): Option[Int] = {
-    if(dayIsOver(minute)) {
+    if (dayIsOver(minute)) {
       None
     } else {
       val newDrivers = exchangeGossips(drivers, minute)
 
-      if(everyoneKnowsEverything(newDrivers)) {
+      if (everyoneKnowsEverything(newDrivers)) {
         Some(minute)
       } else {
         solve(newDrivers, minute + 1)
